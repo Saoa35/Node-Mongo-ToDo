@@ -1,10 +1,20 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { checkIsAuth, logout } from "../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 export const Navbar = () => {
-  const isAuth = false;
+  const isAuth = useSelector(checkIsAuth);
+  const dispatch = useDispatch();
 
   const activeStyles = {
     color: "white",
+  };
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    window.localStorage.removeItem("token");
+    toast("You are logout");
   };
 
   return (
@@ -50,7 +60,7 @@ export const Navbar = () => {
 
       <div className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm px-4 py-2">
         {isAuth ? (
-          <button>Logout</button>
+          <button onClick={logoutHandler}>Logout</button>
         ) : (
           <Link to={"/login"}>
             <button>Sign in</button>
