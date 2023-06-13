@@ -1,3 +1,4 @@
+import Post from "../models/Post.js";
 import User from "../models/User.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -13,7 +14,7 @@ export const createPost = async (req, res) => {
       req.files.image.mv(path.join(__dirname, "..", "uploads", fileName));
 
       const newPostWithImage = new Post({
-        username: user.name,
+        username: user.username,
         title,
         text,
         imgUrl: fileName,
@@ -35,13 +36,25 @@ export const createPost = async (req, res) => {
       imgUrl: "",
       author: req.userId,
     });
-
     await newPostWithoutImage.save();
     await User.findByIdAndUpdate(req.userId, {
       $push: { posts: newPostWithoutImage },
     });
-
     res.json(newPostWithoutImage);
+  } catch (error) {
+    res.json({ message: "Something went wrong" });
+  }
+};
+
+export const getAll = async (req, res) => {
+  try {
+    const posts = await Post.find().sort("-createdAt");
+    const popularPosts = await Post.find().limit(5).sort("-views");
+    if (!posts) {
+      return res.json({ message: "There is no articles yet" });
+    }
+
+    res.json({ posts, popularPosts });
   } catch (error) {
     res.json({ message: "Something went wrong" });
   }
