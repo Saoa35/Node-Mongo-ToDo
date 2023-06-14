@@ -80,7 +80,22 @@ export const getMyPosts = async (req, res) => {
       })
     );
 
-    res.json({ list });
+    res.json(list);
+  } catch (error) {
+    res.json({ message: "Something went wrong" });
+  }
+};
+
+export const removePost = async (req, res) => {
+  try {
+    const post = await Post.findByIdAndDelete(req.params.id);
+    if (!post) return res.json({ message: "This article does not exist" });
+
+    await User.findByIdAndUpdate(req.userId, {
+      $pull: { posts: req.params.id },
+    });
+
+    res.json({ message: "Article was deleted" });
   } catch (error) {
     res.json({ message: "Something went wrong" });
   }
