@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Moment from "react-moment";
 import { AiFillEye, AiOutlineMessage } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import axios from "../utils/axios.js";
 
@@ -21,18 +21,17 @@ export const PostPage = () => {
 
   if (!post) {
     return (
-      <div className="text-xl text-center text-white py-10">
-        There are no articles yet 🫣
-      </div>
+      <div className="text-xl text-center text-white py-10">Loading ...</div>
     );
   }
 
   return (
     <div>
-      <button className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-md py-2 px-4">
-        Back
-      </button>
-
+      <Link to={"/"}>
+        <button className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-md py-2 px-4">
+          Back
+        </button>
+      </Link>
       <div className="flex gap-10 py-8">
         <div className="w-2/3">
           <div className="flex flex-col basis-1/4 flex-grow">
