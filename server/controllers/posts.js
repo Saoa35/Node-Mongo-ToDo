@@ -123,3 +123,17 @@ export const updatePost = async (req, res) => {
     res.json({ message: "Something went wrong" });
   }
 };
+
+export const getPostComments = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const list = await Promise.all(
+      post.comments.map((comment) => {
+        return Comment.findById(comment);
+      })
+    );
+    return res.json(list);
+  } catch (error) {
+    res.json({ message: "Something went wrong" });
+  }
+};

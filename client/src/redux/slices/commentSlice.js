@@ -21,6 +21,18 @@ export const createComment = createAsyncThunk(
   }
 );
 
+export const getPostComments = createAsyncThunk(
+  "comment/getPostComments",
+  async (postId) => {
+    try {
+      const { data } = await axios.get(`/posts/comments/${postId}`);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const commentSlice = createSlice({
   name: "comment",
   initialState,
