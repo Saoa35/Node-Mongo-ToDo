@@ -18,7 +18,7 @@ export const AddPostPage = () => {
       data.append("text", text);
       data.append("image", image);
       dispatch(createPost(data));
-      navigate("/");
+      navigate("/posts");
     } catch (error) {
       console.log(error);
     }

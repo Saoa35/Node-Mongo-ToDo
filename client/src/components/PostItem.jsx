@@ -8,6 +8,17 @@ export const PostItem = ({ post }) => {
       <div className="text-xl text-center text-white py-10">Loading ...</div>
     );
   }
+
+  function truncateText(text) {
+    const words = text.trim().split(/\s+/);
+    const truncatedWords = words.slice(0, 60);
+    let truncatedText = truncatedWords.join(" ");
+    if (words.length > 60) {
+      truncatedText += "...";
+    }
+    return truncatedText;
+  }
+
   return (
     <Link to={`/${post._id}`}>
       <div className="flex flex-col basis-1/4 flex-grow">
@@ -29,7 +40,9 @@ export const PostItem = ({ post }) => {
           </div>
         </div>
         <div className="text-white text-xl">{post.title}</div>
-        <p className="text-white opacity-60 text-xs pt-4">{post.text}</p>
+        <p className="text-white opacity-60 text-justify text-xs pt-4">
+          {truncateText(post.text)}
+        </p>
 
         <div className="flex gap-3 items-center mt-2">
           <button className="flex justify-center items-center gap-2 text-xs text-white opacity-50">
