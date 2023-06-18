@@ -1,0 +1,1 @@
+This project is a block of travel around the world with various interesting articles. The project implements registration, authorization, writing an article, adding photos to it, with the ability to edit the article, add likes and comments.
