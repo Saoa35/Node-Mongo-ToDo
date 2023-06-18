@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 
 export const Navbar = () => {
   const isAuth = useSelector(checkIsAuth);
+  const { user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const activeStyles = {
@@ -58,12 +60,26 @@ export const Navbar = () => {
         </ul>
       )}
 
-      <div className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm px-4 py-2">
+      <div className="flex">
         {isAuth ? (
-          <button onClick={logoutHandler}>Logout</button>
+          <>
+            <p className="text-xs text-white flex justify-center items-center mr-2">
+              Welcome {user.username}
+            </p>
+            <Link to={"/"}>
+              <button
+                className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm px-4 py-2"
+                onClick={logoutHandler}
+              >
+                Logout
+              </button>
+            </Link>
+          </>
         ) : (
           <Link to={"/login"}>
-            <button>Sign in</button>
+            <button className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm px-4 py-2">
+              Sign in
+            </button>
           </Link>
         )}
       </div>
