@@ -1,4 +1,4 @@
-This is a web site with various interesting articles  of travel around the world. The fullstack project implements registration, authorization, writing an article, adding photos to it, with the ability to edit the article, also you can add likes and comments.
+This is a website with various interesting articles of traveling around the world. The fullstack project implements registration, authorization, writing an article, adding photos to it, with the ability to edit the article, also you can add likes and comments.
 It was created by using technologies such as HTML, CSS, Tailwind, JS, React, ReactHooks, ReactRouterDom, ReduxToolkit, NodeJS, MongoDB.
 
 ![355661949_2246625688866618_2312630790504223011_n](https://github.com/Saoa35/My-Blog/assets/78507597/60da57a4-b92a-498d-89d4-f46b0644deb2)
